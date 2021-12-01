@@ -7,7 +7,7 @@ const name = "NU".white+"Bot".blue
 
 const config = JSON.parse(FILE_SYSTEM.readFileSync('config.json', 'utf8'))
 
-const client = new Client( { intents: 32767 } );
+const client = new Client( { intents: 32767, partials: ['MESSAGE', 'CHANNEL'] } );
 
 require("./handlers/events")(client)
 require("./handlers/commands")(client, config)
