@@ -1,0 +1,21 @@
+{
+  "name": "nubot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node main.js debug"
+  },
+  "keywords": [],
+  "author": "Leguan",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.3.1",
+    "colors": "^1.4.0",
+    "@discordjs/builders": "^0.8.2",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "discord-api-types": "^0.25.0",
+    "glob": "^7.2.0",
+    "ascii-table": "^0.0.9"
+  }
+}
