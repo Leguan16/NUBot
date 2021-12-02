@@ -1,5 +1,4 @@
 const { Client, Collection } = require("discord.js");
-const SlashCommandBuilder = require('@discordjs/builders');
 const FILE_SYSTEM = require('fs')
 const COLORS = require("colors");
 
@@ -13,6 +12,7 @@ require("./handlers/events")(client)
 require("./handlers/commands")(client, config)
 
 client.commands = new Collection();
+client.polls = false;
 
 client.login(config.token).then()
 
