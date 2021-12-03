@@ -2,6 +2,8 @@ const { config, client } = require("../../main")
 const {CommandInteraction} = require("discord.js");
 const {SlashCommandBuilder} = require("@discordjs/builders");
 
+//Discontinued for now (just for debug purpose)
+
 module.exports = {
     name: "deleteallcommands",
     description: "deletes all commands",

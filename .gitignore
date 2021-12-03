@@ -4,3 +4,4 @@
 config.json
 package-lock.json
 /polls/
+/commands/administration/deleteAllCommands.js
