@@ -3,6 +3,7 @@
  * https://github.com/Leguan16
  */
 const { CommandInteraction } = require("discord.js")
+
 module.exports = {
     name: "test",
     description: "test command for development",
