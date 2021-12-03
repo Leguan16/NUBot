@@ -15,12 +15,22 @@ module.exports = {
                     name: "message_id",
                     description: "the message id up to which one should be deleted",
                     required: true
+                },
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "channel_id",
+                    description: "Channel id in which messages should get deleted"
+                },
+                {
+                    type: ApplicationCommandOptionType.User,
+                    name: "user",
+                    description: "User of which messages should get deleted"
                 }
             ]
         },
         {
             type: ApplicationCommandOptionType.Subcommand,
-            name: "how_many",
+            name: "amount",
             description: "how many messages should be deleted",
             options: [
                 {
@@ -28,52 +38,116 @@ module.exports = {
                     name: "amount",
                     description: "the amount of how many messages should be deleted",
                     required: true
+                },
+                {
+                    type: ApplicationCommandOptionType.Channel,
+                    name: "channel",
+                    description: "Channel id in which messages should get deleted"
+                },
+                {
+                    type: ApplicationCommandOptionType.User,
+                    name: "user",
+                    description: "User of which messages should get deleted"
                 }
             ]
         }
     ],
+    /**
+     *
+     * @param {CommandInteraction}interaction
+     * @returns {Promise<void>}
+     */
     async execute(interaction) {
-        const channel = interaction.channel
+        let channel = interaction.channel
         const messages = channel.messages.fetch();
-        let amount = interaction.options.getInteger("amount")
+        const amount = interaction.options.getInteger("amount")
         const messageId = interaction.options.getString("message_id")
+        const user = interaction.options.getUser("user")
+        const channelToDelete = interaction.options.getChannel("channel")
+
+        if (channelToDelete) {
+            channel = channelToDelete
+        }
 
         if (amount) {
-            await deleteMessages(amount, channel)
-            interaction.reply("cleared", amount, "messages in channel", channel.toString())
+            const deleted = await deleteMessages(amount, channel, user)
+            interaction.reply("cleared "+ deleted + " messages in channel <#" + channel.id + ">")
         } else if (messageId) {
             const messagesInJSON = (await messages).toJSON();
             const message = (await messages).get(messageId)
             const indexOfMessage = messagesInJSON.indexOf(message)
             const messagesAfter = messagesInJSON.slice(0, indexOfMessage)
             let amount = messagesAfter.length
-            await deleteMessages(amount, channel)
-            interaction.reply("cleared messages in channel", channel)
+            const deleted = await deleteMessages(amount, channel, user)
+            interaction.reply("cleared "+ deleted + " messages in channel <#" + channel.id + ">")
         }
     }
 }
 
+async function deleteMessages(amount, channel, user, old = false) {
+    let deleted = 0;
 
+    while(amount > 0) {
+        let deletedAmount = 0
+        if (old === true || amount < 2 || user) {
+            const messages = await channel.messages.fetch()
 
-async function deleteMessages(amount, channel, old = false) {
-    if (old === true) {
-        const messages = await channel.messages.fetch()
-        for (let i = 0; i < amount; i++) {
-            await messages.last().delete()
-        }
-    }else {
-        let deleted
-        if (amount > 100) {
-            deleted = await channel.bulkDelete(100, true)
-            amount -= 100;
-            await deleteMessages(amount, channel)
+            for (const message of messages) {
+                if (amount === 0) {
+                    continue
+                }
+                console.log(message)
+                console.log(message[1].author)
+                if (user) {
+                    if (message[1].author.id === user.id) {
+                        message[1].delete().then()
+                        deletedAmount++
+                        amount--
+                    }
+                } else {
+                    message.delete().then()
+                    deletedAmount++
+                    amount--
+                }
+            }
+
+            /*for (let message of messages) {
+                if (amount === 0){
+                    continue
+                }
+                if (user) {
+                    if (message[1].author.id === user.id) {
+                        message[1].delete().then()
+                    }
+                    deletedAmount++
+                    amount--
+                } else {
+                    message[1].delete().then()
+                    deletedAmount++
+                    amount--
+                }
+            }*/
         } else {
-            deleted = await channel.bulkDelete(amount, true)
+            if (amount > 100) {
+                deletedAmount += await perform(100, channel)
+            } else {
+                deletedAmount += await perform(amount, channel)
+            }
+            amount-=deletedAmount;
         }
-
-        if (deleted.size < amount) {
-            await deleteMessages(amount - deleted.size, channel, true)
-        }
+        deleted += deletedAmount
     }
+    return deleted
+}
 
+async function perform(amount, channel) {
+    let deletedAmount = 0
+    const deletedMessages = await channel.bulkDelete(amount, true)
+    deletedAmount += deletedMessages.size
+    if (deletedMessages.size !== amount) {
+        deletedAmount += await deleteMessages(amount-deletedMessages.size, channel, true)
+    }
+    deletedAmount += deletedMessages.size
+
+    return deletedAmount
 }

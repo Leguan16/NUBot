@@ -5,7 +5,7 @@ module.exports = {
     name: "messageDelete",
     once: false,
     async execute(event, message, client){
-        console.log(event.member);
+        /*console.log(event.member);
         const channel = message.channel
 
         if (message.partial) {
@@ -20,6 +20,6 @@ module.exports = {
 
 
         console.log(message)
-        console.log(deletedMessage)
+        console.log(deletedMessage)*/
     }
 }

@@ -53,14 +53,16 @@ module.exports = async (client, config) => {
 
         const devGuild = client.guilds.cache.get(config.devGuild)
 
-        await devGuild.commands.set(commandsArray)
+        if (devGuild) {
+            await devGuild.commands.set(commandsArray)
+        }
 
-        commandsArray.forEach((value, index) => {
+        /*commandsArray.forEach((value, index) => {
             if (value.name === "deleteallcommands") {
                 commandsArray.splice(index, 1)
             }
         })
 
-        await client.application.commands.set(commandsArray)
+        await client.application.commands.set(commandsArray)*/
     })
 }
