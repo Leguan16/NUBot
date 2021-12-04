@@ -57,12 +57,12 @@ module.exports = async (client, config) => {
             await devGuild.commands.set(commandsArray)
         }
 
-        /*commandsArray.forEach((value, index) => {
+        commandsArray.forEach((value, index) => {
             if (value.name === "deleteallcommands") {
                 commandsArray.splice(index, 1)
             }
         })
 
-        await client.application.commands.set(commandsArray)*/
+        await client.application.commands.set(commandsArray)
     })
 }

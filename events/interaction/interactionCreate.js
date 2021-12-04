@@ -17,7 +17,10 @@ module.exports = {
                         .setDescription("An error occurred while running the command")
                 ]}) && client.commands.delete(interaction.commandName);
 
-            command.execute(interaction, client)
+            command.execute(interaction, client).catch(reason => {
+                console.error(reason)
+                interaction.reply("An error occurred!")
+            })
         }
     }
 }

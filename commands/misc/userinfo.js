@@ -39,7 +39,7 @@ module.exports = {
 async function userInfo(interaction) {
     const user = await interaction.options.getUser("user").fetch()
     const guildMember = await interaction.options.getMember("user")
-    console.log(typeof guildMember);
+
     if (user) {
         const embed = new MessageEmbed()
             .setColor("#0070cc")
