@@ -4,6 +4,7 @@
  */
 const { CommandInteraction, MessageEmbed, RoleManager, GuildMember, GuildMemberRoleManager } = require("discord.js")
 const {ApplicationCommandOptionType} = require("discord-api-types/v8");
+const {client} = require("../../main");
 
 module.exports = {
     name: "userinfo",
@@ -45,6 +46,7 @@ async function userInfo(interaction) {
             .setTitle("Userinfo")
             .setDescription("Information about user <@" + user.id + ">")
             .setTimestamp(Date.now())
+            .setFooter("Userinfo by " + client.user.username, client.user.avatarURL({size: 4096}))
             .setThumbnail(user.avatarURL({size:4096}))
             .addField("Name:", user.username+"#"+user.discriminator, true)
 
