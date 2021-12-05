@@ -3,5 +3,8 @@
   "prefix": "",
   "owner": "",
   "devGuild": "",
-  "botId": ""
+  "botId": "",
+  "quote": {
+    "channelId": ""
+  }
 }
