@@ -3,6 +3,7 @@ const { Client } = require("discord.js")
 const { promisify } = require("util");
 const { glob } = require("glob");
 const config = require("../main")
+const {ApplicationCommandType} = require("discord-api-types/v8");
 
 
 const PG = promisify(glob);
@@ -26,10 +27,11 @@ module.exports = async (client, config) => {
             return
         }
         if (!command.description) {
-            const path = file.split("/");
-            error++;
-            await console.log("Loading command".red, command.name, "failed: Missing description.".red)
-            return
+            if (command.type !== "2" && command.type !== "MESSAGE") {
+                error++;
+                await console.log("Loading command".red, command.name, "failed: Missing description.".red)
+                return
+            }
         }
         if (command.permissions) {
             if (Perms.includes(command.permissions)) {
