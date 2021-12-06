@@ -4,7 +4,8 @@
  */
 
 const {ButtonInteraction, MessageEmbed, MessageActionRow, MessageButton} = require("discord.js")
-const {quote} = require("../../config.json")
+const botConfig = require("../../util/botConfig")
+
 module.exports = {
     name: "interactionCreate",
     async execute(interaction) {
@@ -12,14 +13,21 @@ module.exports = {
             return
         }
 
-        const { customId, message } = interaction
+        if (interaction.label === "back") {
+            const config = require("../../commands/config/config")
+
+            await config.execute(interaction);
+            return
+        }
+
+        const {customId, message, guild} = interaction
         await message.fetch()
 
         const errorEmbed = new MessageEmbed()
             .setDescription("Error")
 
-        if (customId === "quote" ) {
-            const embed = message.embeds[0]
+        if (customId === "quote") {
+            const embed = new MessageEmbed()
 
             if (!embed) {
                 await interaction.reply({embeds: [errorEmbed], ephemeral: true})
@@ -29,8 +37,8 @@ module.exports = {
             embed
                 .setDescription("Edit the quote config")
 
-            const channelId = quote.channelId
-            embed.addField("channelId", `${channelId ? channelId : "none"}`)
+            const channelId = botConfig.getConfig().quote.channelId
+            embed.addField("channelId", `${channelId ? `${channelId}\n${await guild.channels.fetch(channelId)}` : "none"}`)
 
             const components = message.components
 
@@ -41,7 +49,8 @@ module.exports = {
 
             const row = new MessageActionRow()
 
-            row.addComponents(new MessageButton().setCustomId("config.channelId").setLabel("channelId").setStyle("PRIMARY"))
+            row.addComponents(new MessageButton().setCustomId("quote.channelId").setLabel("channelId").setStyle("PRIMARY"))
+            row.addComponents(new MessageButton().setCustomId("quote").setLabel("back").setStyle("DANGER"))
             await interaction.update({embeds: [embed], components: [row]})
         }
     }

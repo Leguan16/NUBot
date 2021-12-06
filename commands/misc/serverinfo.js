@@ -2,9 +2,9 @@
  * Copyright (c) 2021. Leguan16
  * https://github.com/Leguan16
  */
-const { CommandInteraction, MessageEmbed, RoleManager, GuildMember } = require("discord.js")
-const { GuildPremiumTier } = require("discord-api-types/v8")
-const { client } = require("../../main")
+const {CommandInteraction, MessageEmbed, RoleManager, GuildMember} = require("discord.js")
+const {GuildPremiumTier} = require("discord-api-types/v8")
+const {client} = require("../../main")
 
 module.exports = {
     name: "serverinfo",
@@ -21,7 +21,7 @@ module.exports = {
 /**
  *
  * @param {CommandInteraction} interaction
- * @requires {RoleManager, GuildMember, GuildPremiumTier}
+ * @requires {RoleManager, GuildMember, GuildPremiumTier, client}
  * @returns {Promise<void>}
  */
 async function serverInfo(interaction) {
@@ -43,7 +43,7 @@ async function serverInfo(interaction) {
         .setDescription("Information about the guild")
         .setTimestamp(Date.now())
         .setFooter("Serverinfo by " + client.user.username, client.user.avatarURL({size: 4096}))
-        .setThumbnail(guild.iconURL({size:4096}), )
+        .setThumbnail(guild.iconURL({size: 4096}),)
         .addField("Name:", guild.name)
         .addField("Member count:", guild.memberCount.toString())
         .addField("Date Created:", guild.createdAt.toDateString())

@@ -1,17 +1,17 @@
-const { Perms } = require("../validation/permissions");
-const { Client } = require("discord.js")
-const { promisify } = require("util");
-const { glob } = require("glob");
-const config = require("../main")
+const {Perms} = require("../validation/permissions");
+const {Client} = require("discord.js")
+const {promisify} = require("util");
+const {glob} = require("glob");
+const botConfig = require("../util/botConfig")
 const {ApplicationCommandType} = require("discord-api-types/v8");
 
 
 const PG = promisify(glob);
 /**
+ * @requires botConfig
  * @param {Client} client
- * @param {config} config
  */
-module.exports = async (client, config) => {
+module.exports = async (client) => {
 
     const commandsArray = [];
     let successful = 0;
@@ -53,7 +53,7 @@ module.exports = async (client, config) => {
 
     client.on("ready", async () => {
 
-        const devGuild = client.guilds.cache.get(config.devGuild)
+        const devGuild = client.guilds.cache.get(botConfig.getConfig().devGuild)
 
         if (devGuild) {
             await devGuild.commands.set(commandsArray)

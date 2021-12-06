@@ -1,6 +1,7 @@
-const { SelectMenuInteraction, MessageEmbed, GuildChannel} = require("discord.js")
-const { config } = require("../../main")
+const {SelectMenuInteraction, MessageEmbed, GuildChannel} = require("discord.js")
+const botConfig = require("../../util/botConfig")
 const fs = require("fs")
+
 module.exports = {
     name: "interactionCreate",
     /**
@@ -18,21 +19,18 @@ module.exports = {
             .setColor("RED")
             .setDescription("Error")
 
-        const { customId } = interaction
+        const {customId} = interaction
 
-        if (customId !== "config.channelId.menu") {
+        if (customId !== "quote.channelId.menu") {
             return
         }
 
-        console.log(interaction)
-
-        config.quote.channelId = interaction.values[0] ? interaction.values[0] : "none"
-
-        fs.writeFileSync(process.cwd()+"/config.json", JSON.stringify(config), "utf8")
+        botConfig.getConfig().quote.channelId = interaction.values[0] ? interaction.values[0] : "none"
+        botConfig.save()
 
         const embed = new MessageEmbed()
             .setColor("GREEN")
-            .setDescription(`updated value of \`quote.channelId\` to \`${config.quote.channelId}\``)
+            .setDescription(`updated value of \`quote.channelId\` to \`${botConfig.getConfig().quote.channelId}\``)
 
         interaction.update({embeds: [embed], components: []})
     }

@@ -2,7 +2,7 @@
  * Copyright (c) 2021. Leguan16
  * https://github.com/Leguan16
  */
-const { CommandInteraction, MessageEmbed, RoleManager, GuildMember, GuildMemberRoleManager } = require("discord.js")
+const {CommandInteraction, MessageEmbed, RoleManager, GuildMember, GuildMemberRoleManager} = require("discord.js")
 const {ApplicationCommandOptionType} = require("discord-api-types/v8");
 const {client} = require("../../main");
 
@@ -14,7 +14,7 @@ module.exports = {
             name: "user",
             description: "the user to display the info",
             type: ApplicationCommandOptionType.User,
-            required:true
+            required: true
         }
     ],
     /**
@@ -30,6 +30,7 @@ module.exports = {
     },
     userInfo
 }
+
 /**
  *
  * @param {CommandInteraction} interaction
@@ -47,8 +48,8 @@ async function userInfo(interaction) {
             .setDescription("Information about user <@" + user.id + ">")
             .setTimestamp(Date.now())
             .setFooter("Userinfo by " + client.user.username, client.user.avatarURL({size: 4096}))
-            .setThumbnail(user.avatarURL({size:4096}))
-            .addField("Name:", user.username+"#"+user.discriminator, true)
+            .setThumbnail(user.avatarURL({size: 4096}))
+            .addField("Name:", user.username + "#" + user.discriminator, true)
 
         if (guildMember.nickname) {
             embed
@@ -75,7 +76,7 @@ async function userInfo(interaction) {
             embed.addField("Roles:", roleMentions)
         }
 
-        interaction.reply({embeds: [embed], })
+        interaction.reply({embeds: [embed],})
 
     } else {
         interaction.reply("Invalid user provided")

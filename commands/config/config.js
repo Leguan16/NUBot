@@ -3,7 +3,7 @@
  * https://github.com/Leguan16
  */
 
-const {CommandInteraction, MessageActionRow, MessageButton, MessageEmbed} = require("discord.js");
+const {CommandInteraction, MessageActionRow, MessageButton, MessageEmbed, ButtonInteraction} = require("discord.js");
 const {MessageButtonStyles} = require("discord-api-types/v9");
 
 module.exports = {
@@ -24,7 +24,14 @@ module.exports = {
         )
 
         const embed = new MessageEmbed()
+            .setColor("#ab006c")
+            .setTitle("Config")
             .setDescription("Edit the config!")
-        await interaction.reply({embeds: [embed], components: [row] })
+
+        if (interaction.isCommand()) {
+            await interaction.reply({embeds: [embed], components: [row]})
+        } else if (interaction.isButton()) {
+            await interaction.update({embeds: [embed], components: [row]})
+        }
     }
 }

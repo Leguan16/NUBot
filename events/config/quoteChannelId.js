@@ -3,7 +3,7 @@
  * https://github.com/Leguan16
  */
 
-const { ButtonInteraction, GuildChannel, MessageSelectMenu, MessageActionRow, MessageEmbed} = require("discord.js")
+const {ButtonInteraction, GuildChannel, MessageSelectMenu, MessageActionRow, MessageEmbed, MessageButton} = require("discord.js")
 
 module.exports = {
     name: "interactionCreate",
@@ -23,12 +23,12 @@ module.exports = {
             .setDescription("Error")
 
 
-        const { customId, guild } = interaction
+        const {customId, guild} = interaction
 
-        if (customId === "config.channelId") {
+        if (customId === "quote.channelId") {
             const channels = guild.channels.fetch()
 
-            const selectMenu = new MessageSelectMenu().setCustomId("config.channelId.menu").setPlaceholder("select channel");
+            const selectMenu = new MessageSelectMenu().setCustomId("quote.channelId.menu").setPlaceholder("select channel");
 
             (await channels).forEach(channel => {
                 if (channel.type === "GUILD_TEXT") {
@@ -49,10 +49,13 @@ module.exports = {
 
             const row = new MessageActionRow().addComponents(selectMenu)
 
+            const buttonRow = new MessageActionRow()
+                .addComponents(new MessageButton().setCustomId("quote.channelId").setLabel("back").setStyle("DANGER"))
+
             const embed = new MessageEmbed()
                 .setDescription("Edit the quote.channelId config")
 
-            await interaction.update({embeds: [embed], components: [row]})
+            await interaction.update({embeds: [embed], components: [row,buttonRow]})
         }
 
     }

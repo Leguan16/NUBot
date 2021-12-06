@@ -1,10 +1,10 @@
-const client = require("../../main")
+const {client} = require("../../main")
 const discord = require("discord.js")
 
 module.exports = {
     name: "messageDelete",
     once: false,
-    async execute(event, message, client){
+    async execute(event, message, client) {
         /*console.log(event.member);
         const channel = message.channel
 

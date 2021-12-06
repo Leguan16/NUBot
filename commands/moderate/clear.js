@@ -1,9 +1,9 @@
 const {CommandInteraction, MessageEmbed} = require("discord.js");
-const { ApplicationCommandOptionType } = require("discord-api-types/v8");
+const {ApplicationCommandOptionType} = require("discord-api-types/v8");
 
 module.exports = {
     name: "clear",
-    description:"Clears a specific amount of messages",
+    description: "Clears a specific amount of messages",
     options: [
         {
             type: ApplicationCommandOptionType.Integer,
@@ -49,7 +49,7 @@ module.exports = {
 async function deleteMessages(amount, channel, user, old = false) {
     let deleted = 0;
 
-    while(amount > 0) {
+    while (amount > 0) {
         let deletedAmount = 0
         if (old === true || amount < 2 || user) {
             const messages = await channel.messages.fetch()
@@ -77,7 +77,7 @@ async function deleteMessages(amount, channel, user, old = false) {
             } else {
                 deletedAmount += await perform(amount, channel)
             }
-            amount-=deletedAmount;
+            amount -= deletedAmount;
         }
         deleted += deletedAmount
     }
@@ -89,7 +89,7 @@ async function perform(amount, channel) {
     const deletedMessages = await channel.bulkDelete(amount, true)
     deletedAmount += deletedMessages.size
     if (deletedMessages.size !== amount) {
-        deletedAmount += await deleteMessages(amount-deletedMessages.size, channel, false, true)
+        deletedAmount += await deleteMessages(amount - deletedMessages.size, channel, false, true)
     }
     deletedAmount += deletedMessages.size
 

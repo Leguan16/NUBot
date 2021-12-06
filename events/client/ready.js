@@ -1,4 +1,4 @@
-const client = require("../../main")
+const {client} = require("../../main")
 const fs = require("fs")
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
         if (!fs.existsSync(`${process.cwd()}/polls/`)) {
             fs.mkdirSync(`${process.cwd()}/polls/`, {recursive: true})
 
-
+            const name = "NU".white + "Bot".blue
         }
     }
 }

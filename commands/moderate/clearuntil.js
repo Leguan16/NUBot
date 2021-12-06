@@ -4,8 +4,9 @@
  */
 
 const {ApplicationCommandOptionType} = require("discord-api-types/v8");
-const { CommandInteraction, MessageEmbed} = require("discord.js")
-const { deleteMessages } = require("./clear")
+const {CommandInteraction, MessageEmbed} = require("discord.js")
+const {deleteMessages} = require("./clear")
+
 module.exports = {
     name: "clearuntil",
     description: "Clears a specific amount of messages",

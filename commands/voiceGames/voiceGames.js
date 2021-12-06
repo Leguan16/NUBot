@@ -2,7 +2,7 @@
  * Copyright (c) 2021. Leguan16
  * https://github.com/Leguan16
  */
-const { CommandInteraction, GuildMember, Application} = require("discord.js")
+const {CommandInteraction, GuildMember} = require("discord.js")
 const {ApplicationCommandOptionType, ChannelType, InviteTargetType} = require("discord-api-types/v8");
 
 module.exports = {
@@ -61,7 +61,7 @@ module.exports = {
     /**
      *
      * @param {CommandInteraction} interaction
-     * @requires {GuildMember}
+     * @requires {GuildMember, ChannelType, InviteTargetType}
      * @returns {Promise<void>}
      */
     async execute(interaction) {
@@ -85,7 +85,11 @@ module.exports = {
             return
         }
 
-        const invite = await channel.createInvite({targetApplication: interaction.options.getString("game"), targetType: 2, maxAge: 1000})
+        const invite = await channel.createInvite({
+            targetApplication: interaction.options.getString("game"),
+            targetType: 2,
+            maxAge: 1000
+        })
 
         interaction.reply("Created game at: https://discord.gg/" + invite)
     }
