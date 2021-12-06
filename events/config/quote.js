@@ -42,9 +42,7 @@ module.exports = {
             const row = new MessageActionRow()
 
             row.addComponents(new MessageButton().setCustomId("config.channelId").setLabel("channelId").setStyle("PRIMARY"))
-            await message.edit({embeds: [embed], components: [row]})
-
-            interaction.reply({content: "entered quote config", ephemeral: true})
+            await interaction.update({embeds: [embed], components: [row]})
         }
     }
 }

@@ -19,12 +19,11 @@ module.exports = {
         }
 
         const errorEmbed = new MessageEmbed()
+            .setColor("RED")
             .setDescription("Error")
 
 
-        const { customId, message, guild } = interaction
-
-        message.fetch()
+        const { customId, guild } = interaction
 
         if (customId === "config.channelId") {
             const channels = guild.channels.fetch()
@@ -53,9 +52,7 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setDescription("Edit the quote.channelId config")
 
-            await message.edit({embeds: [embed], components: [row]})
-
-            interaction.reply({content: "Select a channel to send quotes in", ephemeral: true})
+            await interaction.update({embeds: [embed], components: [row]})
         }
 
     }

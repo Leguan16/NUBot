@@ -7,9 +7,10 @@ const name = "NU".white+"Bot".blue
 let config = JSON.parse(FILE_SYSTEM.readFileSync('config.json', 'utf8'))
 
 if (!config) {
-    console.log("config.json is missing. Please create a file named 'config.json' or copy and rename the 'config_example.json' to 'config.json".red)
-    config = JSON.parse(FILE_SYSTEM.readFileSync('config_example.json', 'utf8'))
+    console.log("config.json is missing. Please create a file named 'config.json' or copy and rename the 'config.json' to 'config.json".red)
+    config = JSON.parse(FILE_SYSTEM.readFileSync('config.json', 'utf8'))
 }
+
 
 if (!config.token) {
     console.log(`bot token is missing in the config`)
