@@ -1,6 +1,5 @@
 const {SelectMenuInteraction, MessageEmbed, GuildChannel} = require("discord.js")
 const botConfig = require("../../util/botConfig")
-const fs = require("fs")
 
 module.exports = {
     name: "interactionCreate",
@@ -28,10 +27,14 @@ module.exports = {
         botConfig.getConfig().quote.channelId = interaction.values[0] ? interaction.values[0] : "none"
         botConfig.save()
 
+        const newChannelId = botConfig.getConfig().quote.channelId
+
         const embed = new MessageEmbed()
             .setColor("GREEN")
-            .setDescription(`updated value of \`quote.channelId\` to \`${botConfig.getConfig().quote.channelId}\``)
+            .setDescription(`updated value of \`quote.channelId\` to \`${newChannelId}\` (${await interaction.guild.channels.fetch(newChannelId)})`)
 
-        interaction.update({embeds: [embed], components: []})
+        interaction
+            .update({embeds: [embed]})
+            .catch(() => interaction.reply({embeds: [errorEmbed], ephemeral: true}))
     }
 }

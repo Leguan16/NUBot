@@ -8,25 +8,23 @@ const botConfig = require("../../util/botConfig")
 
 module.exports = {
     name: "interactionCreate",
+    /**
+     *
+     * @param {ButtonInteraction} interaction
+     * @return {Promise<void>}
+     */
     async execute(interaction) {
         if (!interaction.isButton()) {
             return
         }
 
-        if (interaction.label === "back") {
-            const config = require("../../commands/config/config")
-
-            await config.execute(interaction);
-            return
-        }
-
-        const {customId, message, guild} = interaction
+        const { customId, message, guild} = interaction
         await message.fetch()
 
         const errorEmbed = new MessageEmbed()
             .setDescription("Error")
 
-        if (customId === "quote") {
+        if (customId === "quote" || customId === "quote.channelId.back") {
             const embed = new MessageEmbed()
 
             if (!embed) {
@@ -35,6 +33,7 @@ module.exports = {
             }
 
             embed
+                .setColor("#ab006c")
                 .setDescription("Edit the quote config")
 
             const channelId = botConfig.getConfig().quote.channelId
@@ -50,7 +49,8 @@ module.exports = {
             const row = new MessageActionRow()
 
             row.addComponents(new MessageButton().setCustomId("quote.channelId").setLabel("channelId").setStyle("PRIMARY"))
-            row.addComponents(new MessageButton().setCustomId("quote").setLabel("back").setStyle("DANGER"))
+            row.addComponents(new MessageButton().setCustomId("quote.back").setLabel("back").setStyle("DANGER"))
+
             await interaction.update({embeds: [embed], components: [row]})
         }
     }

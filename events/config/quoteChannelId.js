@@ -50,12 +50,15 @@ module.exports = {
             const row = new MessageActionRow().addComponents(selectMenu)
 
             const buttonRow = new MessageActionRow()
-                .addComponents(new MessageButton().setCustomId("quote.channelId").setLabel("back").setStyle("DANGER"))
+                .addComponents(new MessageButton().setCustomId("quote.channelId.back").setLabel("back").setStyle("DANGER"))
 
             const embed = new MessageEmbed()
+                .setColor("#ab006c")
                 .setDescription("Edit the quote.channelId config")
 
-            await interaction.update({embeds: [embed], components: [row,buttonRow]})
+            await interaction
+                .update({embeds: [embed], components: [row,buttonRow]})
+                .catch(() => interaction.reply({embeds: [errorEmbed], ephemeral: true}))
         }
 
     }

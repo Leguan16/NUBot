@@ -4,7 +4,6 @@
  */
 
 const {CommandInteraction, MessageActionRow, MessageButton, MessageEmbed, ButtonInteraction} = require("discord.js");
-const {MessageButtonStyles} = require("discord-api-types/v9");
 
 module.exports = {
     name: "config",
@@ -13,25 +12,31 @@ module.exports = {
     /**
      *
      * @requires {MessageButton, MessageActionRow}
-     * @param {CommandInteraction} interaction
+     * @param {CommandInteraction, ButtonInteraction} interaction
      * @returns {Promise<void>}
      */
     async execute(interaction) {
-        const row = new MessageActionRow()
+        await reply(interaction)
+    },
+    reply
+}
 
-        row.addComponents(
-            new MessageButton().setCustomId("quote").setLabel("Quote").setStyle("PRIMARY")
-        )
 
-        const embed = new MessageEmbed()
-            .setColor("#ab006c")
-            .setTitle("Config")
-            .setDescription("Edit the config!")
+async function reply(interaction) {
+    const row = new MessageActionRow()
 
-        if (interaction.isCommand()) {
-            await interaction.reply({embeds: [embed], components: [row]})
-        } else if (interaction.isButton()) {
-            await interaction.update({embeds: [embed], components: [row]})
-        }
+    row.addComponents(
+        new MessageButton().setCustomId("quote").setLabel("Quote").setStyle("PRIMARY")
+    )
+
+    const embed = new MessageEmbed()
+        .setColor("#ab006c")
+        .setTitle("Config")
+        .setDescription("Edit the config!")
+
+    if (interaction.isCommand()) {
+        await interaction.reply({embeds: [embed], components: [row]})
+    } else if (interaction.isButton()) {
+        await interaction.update({embeds: [embed], components: [row]})
     }
 }
