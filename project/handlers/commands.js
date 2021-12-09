@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021. Leguan16
+ * https://github.com/Leguan16
+ * https://github.com/Leguan16/NUBot/blob/master/LICENSE.md
+ */
+
 const {Perms} = require("../validation/permissions");
 const {Client} = require("discord.js")
 const {promisify} = require("util");
