@@ -3,6 +3,6 @@
 /.idea/
 config.json
 package-lock.json
-/polls/
-/commands/administration/deleteAllCommands.js
+/project/polls/
+/project/commands/administration/deleteAllCommands.js
 clipboard

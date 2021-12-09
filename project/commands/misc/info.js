@@ -4,7 +4,7 @@
  */
 const {CommandInteraction} = require("discord.js")
 const {ApplicationCommandOptionType} = require("discord-api-types/v8")
-const {userInfo} = require("./userInfo")
+const {userInfo} = require("./userinfo")
 const {serverInfo} = require("./serverinfo")
 
 module.exports = {

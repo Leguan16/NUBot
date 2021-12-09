@@ -1,9 +1,10 @@
-const { Client, Collection } = require("discord.js");
-const FILE_SYSTEM = require('fs')
-const COLORS = require("colors");
-const botConfig = require("./util/botConfig")
+/*
+ * Copyright (c) 2021. Leguan16
+ * https://github.com/Leguan16
+ */
 
-const name = "NU".white+"Bot".blue
+const { Client, Collection } = require("discord.js");
+const botConfig = require("./util/botConfig")
 
 botConfig.init();
 

@@ -3,8 +3,6 @@ const {Client} = require("discord.js")
 const {promisify} = require("util");
 const {glob} = require("glob");
 const botConfig = require("../util/botConfig")
-const {ApplicationCommandType} = require("discord-api-types/v8");
-
 
 const PG = promisify(glob);
 /**
@@ -17,7 +15,7 @@ module.exports = async (client) => {
     let successful = 0;
     let error = 0;
 
-    (await PG(`${process.cwd()}/commands/*/*.js`)).map(async (file) => {
+    (await PG(`${process.cwd()}/project/commands/*/*.js`)).map(async (file) => {
         const command = require(file);
 
         if (!command.name) {
