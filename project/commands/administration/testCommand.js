@@ -14,6 +14,6 @@ module.exports = {
      * @param { CommandInteraction } interaction
      */
     execute(interaction) {
-        interaction.reply("test!").then()
+        interaction.reply("test").then()
     }
 }
