@@ -17,8 +17,6 @@ module.exports = {
 
         if (!fs.existsSync(`${process.cwd()}/polls/`)) {
             fs.mkdirSync(`${process.cwd()}/polls/`, {recursive: true})
-
-
         }
     }
 }

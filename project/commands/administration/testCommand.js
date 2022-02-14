@@ -8,6 +8,9 @@ module.exports = {
      * @param { CommandInteraction } interaction
      */
     execute(interaction) {
+
+        console.log(interaction.user)
+
         interaction.reply("test").then()
     }
 }

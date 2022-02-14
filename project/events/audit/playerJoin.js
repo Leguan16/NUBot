@@ -9,16 +9,19 @@ module.exports = {
         const guild = user.guild
         const logChannel = await guild.channels.fetch(botConfig.getConfig().audit.playerJoin)
 
-        console.log(user)
-
         if (logChannel === null) {
             return
         }
 
+
+
         const embed = new MessageEmbed()
             .setColor("00aa00")
             .setTitle("User Joined")
-            .addField("Name", `wwww`)
+            .setDescription(`${user.user.name} joined the server`)
+            .setTimestamp(Date.now())
+            .setFooter(`User Id: ${user.id}`, user.guild.avatarURL({size: 4096}))
+            .setThumbnail(user.iconURL({size: 4096}))
 
         logChannel.send({embeds: [embed]})
     }
