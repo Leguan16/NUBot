@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2021. Leguan16
- * https://github.com/Leguan16
- */
-
 const {ButtonInteraction, GuildChannel, MessageSelectMenu, MessageActionRow, MessageEmbed, MessageButton} = require("discord.js")
 
 module.exports = {

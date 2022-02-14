@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2021. Leguan16
- * https://github.com/Leguan16
- * https://github.com/Leguan16/NUBot/blob/master/LICENSE.md
- */
-
 const {ButtonInteraction, MessageEmbed, MessageActionRow, MessageButton} = require("discord.js")
 const botConfig = require("../../util/botConfig")
 

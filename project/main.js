@@ -1,15 +1,9 @@
-/*
- * Copyright (c) 2021. Leguan16
- * https://github.com/Leguan16
- * https://github.com/Leguan16/NUBot/blob/master/LICENSE.md
- */
-
-const { Client, Collection } = require("discord.js");
+const {Client, Collection} = require("discord.js");
 const botConfig = require("./util/botConfig")
 
 botConfig.init();
 
-const client = new Client( { intents: 32767, partials: ['MESSAGE', 'CHANNEL'] } )
+const client = new Client({intents: 32767, partials: ['MESSAGE', 'CHANNEL']})
 
 require("./handlers/events")(client)
 require("./handlers/commands")(client)
