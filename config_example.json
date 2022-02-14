@@ -6,5 +6,8 @@
   "botId": "",
   "quote": {
     "channelId": ""
+  },
+  "audit":  {
+    "playerJoin": ""
   }
 }
