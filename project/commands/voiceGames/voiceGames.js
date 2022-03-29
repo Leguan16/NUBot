@@ -22,7 +22,7 @@ module.exports = {
                 },
                 {
                     name: "Watch Together",
-                    value: "755600276941176913"
+                    value: "880218394199220334"
                 },
                 {
                     name: "Chess",
@@ -53,8 +53,32 @@ module.exports = {
                     value: "879863976006127627"
                 },
                 {
-                    name: "Lettertile",
-                    value: "879863686565621790"
+                    name: "Sketchy Artist",
+                    value: "879864070101172255"
+                },
+                {
+                    name: "Awkword",
+                    value: "879863881349087252"
+                },
+                // {
+                //     name: "Delete Me Calla",
+                //     value: "832012854282158180"
+                // },
+                {
+                    name: "Sketch Heads",
+                    value: "902271654783242291"
+                },
+                {
+                    name: "Checkers In The Park",
+                    value: "832013003968348200"
+                },
+                {
+                    name: "Blazing 8s",
+                    value: "832025144389533716"
+                },
+                {
+                    name: "Putt Party",
+                    value: "945737671223947305"
                 }
             ],
             required: true
