@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2021. Leguan16
- * https://github.com/Leguan16
- * https://github.com/Leguan16/NUBot/blob/master/LICENSE.md
- */
-
 const {CommandInteraction} = require("discord.js")
 
 module.exports = {
@@ -14,6 +8,9 @@ module.exports = {
      * @param { CommandInteraction } interaction
      */
     execute(interaction) {
+
+        console.log(interaction.user)
+
         interaction.reply("test").then()
     }
 }

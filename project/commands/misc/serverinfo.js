@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2021. Leguan16
- * https://github.com/Leguan16
- * https://github.com/Leguan16/NUBot/blob/master/LICENSE.md
- */
-
 const {CommandInteraction, MessageEmbed, RoleManager, GuildMember} = require("discord.js")
 const {GuildPremiumTier} = require("discord-api-types/v8")
 const {client} = require("../../main")
