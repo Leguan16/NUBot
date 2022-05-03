@@ -3,6 +3,7 @@ const {ApplicationCommandOptionType} = require("discord-api-types/v8");
 const {client} = require("../../main");
 
 module.exports = {
+    activated: true,
     name: "userinfo",
     description: "get info about a specific user",
     options: [

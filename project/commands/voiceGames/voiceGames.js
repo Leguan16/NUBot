@@ -2,6 +2,7 @@ const {CommandInteraction, GuildMember} = require("discord.js")
 const {ApplicationCommandOptionType, ChannelType, InviteTargetType} = require("discord-api-types/v8");
 
 module.exports = {
+    activated: true,
     name: "voicegames",
     description: "start a voicegame",
     options: [

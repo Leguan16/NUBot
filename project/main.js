@@ -11,7 +11,7 @@ require("./handlers/commands")(client)
 client.commands = new Collection()
 client.polls = false
 
-client.login(botConfig.getConfig().token).then()
+client.login(botConfig.getConfig().token_dev).then()
 
 module.exports = {
     client

@@ -2,6 +2,7 @@ const {CommandInteraction, MessageEmbed} = require("discord.js");
 const {ApplicationCommandOptionType} = require("discord-api-types/v8");
 
 module.exports = {
+    activated: true,
     name: "clear",
     description: "Clears a specific amount of messages",
     options: [

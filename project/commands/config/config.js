@@ -1,6 +1,7 @@
 const {CommandInteraction, MessageActionRow, MessageButton, MessageEmbed, ButtonInteraction} = require("discord.js");
 
 module.exports = {
+    activated: true,
     name: "config",
     description: "change the bots config",
     permission: "ADMINISTRATOR",

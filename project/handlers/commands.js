@@ -21,9 +21,14 @@ module.exports = async (client) => {
         if (!command.name) {
             const path = file.split("/");
             error++;
-            await console.log("Loading command".red, path[7], "failed: Missing name.".red)
+            await console.log("Loading command".red, path[8], "failed: Missing name.".red)
             return
         }
+
+        if(!command.activated){
+            return
+        }
+
         if (!command.description) {
             if (command.type !== "2" && command.type !== "MESSAGE") {
                 error++;
@@ -31,6 +36,7 @@ module.exports = async (client) => {
                 return
             }
         }
+
         if (command.permissions) {
             if (Perms.includes(command.permissions)) {
                 command.defaultPermission = false;

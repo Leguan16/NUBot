@@ -1,6 +1,7 @@
 const {CommandInteraction} = require("discord.js")
 
 module.exports = {
+    activated: true,
     name: "quote",
     type: "MESSAGE",
     /**

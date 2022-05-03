@@ -3,6 +3,7 @@ const {ApplicationCommandOptionType} = require("discord-api-types/v8");
 const fs = require("fs");
 
 module.exports = {
+    activated: true,
     name: "poll",
     description: "create a poll",
     options: [

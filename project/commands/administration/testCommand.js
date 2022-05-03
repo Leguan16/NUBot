@@ -1,6 +1,7 @@
 const {CommandInteraction} = require("discord.js")
 
 module.exports = {
+    activated: true,
     name: "test",
     description: "test command for development",
     /**

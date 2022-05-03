@@ -4,6 +4,7 @@ const {userInfo} = require("./userinfo")
 const {serverInfo} = require("./serverinfo")
 
 module.exports = {
+    activated: true,
     name: "info",
     description: "get info about either a server or a user",
     options: [

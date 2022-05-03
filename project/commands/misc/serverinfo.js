@@ -3,6 +3,7 @@ const {GuildPremiumTier} = require("discord-api-types/v8")
 const {client} = require("../../main")
 
 module.exports = {
+    activated: true,
     name: "serverinfo",
     description: "get info about the guild",
     async execute(interaction) {
