@@ -1,5 +1,5 @@
-const {CommandInteraction, MessageEmbed, RoleManager, GuildMember, GuildMemberRoleManager} = require("discord.js")
-const {ApplicationCommandOptionType} = require("discord-api-types/v8");
+const {CommandInteraction, RoleManager, GuildMember, GuildMemberRoleManager, EmbedBuilder} = require("discord.js")
+const {ApplicationCommandOptionType} = require("discord-api-types/v10");
 const {client} = require("../../main");
 
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
 /**
  *
  * @param {CommandInteraction} interaction
- * @requires {RoleManager, GuildMember, GuildMemberRoleManager}
+ * @requires {RoleManager, GuildMember, GuildMemberRoleManager, EmbedBuilder}
  * @returns {Promise<void>}
  */
 async function userInfo(interaction) {
@@ -39,26 +39,26 @@ async function userInfo(interaction) {
     const guildMember = await interaction.options.getMember("user")
 
     if (user) {
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor("#0070cc")
             .setTitle("Userinfo")
             .setDescription("Information about user <@" + user.id + ">")
             .setTimestamp(Date.now())
-            .setFooter("Userinfo by " + client.user.username, client.user.avatarURL({size: 4096}))
+            .setFooter({text: "Userinfo by " + client.user.username, iconURL: client.user.avatarURL({size: 4096})})
             .setThumbnail(user.avatarURL({size: 4096}))
-            .addField("Name:", user.username + "#" + user.discriminator, true)
+            .addFields({ name: 'Name', value: user.username + "#" + user.discriminator, inline: true })
 
         if (guildMember.nickname) {
             embed
-                .addField("Nickname:", guildMember.nickname, true)
+                .addFields({name: "Nickname:", value: guildMember.nickname, inline: true})
         }
 
         embed
-            .addField("Joined at:", guildMember.joinedAt.toDateString())
-            .addField("Account created:", user.createdAt.toDateString())
+            .addFields({name: "Joined at:", value: guildMember.joinedAt.toDateString()},
+                {name: "Account created:", value: user.createdAt.toDateString()})
 
         if (guildMember.premiumSince) {
-            embed.addField("Boosting server since:", guildMember.premiumSince.toDateString())
+            embed.addFields({name: "Boosting server since:", value: guildMember.premiumSince.toDateString()})
         }
 
         const roles = await guildMember.roles.cache;
@@ -70,7 +70,7 @@ async function userInfo(interaction) {
         })
 
         if (roleMentions) {
-            embed.addField("Roles:", roleMentions)
+            embed.addFields({name: "Roles:", value: roleMentions})
         }
 
         interaction.reply({embeds: [embed],})

@@ -1,5 +1,5 @@
 const {CommandInteraction, GuildMember} = require("discord.js")
-const {ApplicationCommandOptionType, ChannelType, InviteTargetType} = require("discord-api-types/v8");
+const {ApplicationCommandOptionType, ChannelType, InviteTargetType} = require("discord-api-types/v10");
 
 module.exports = {
     activated: true,

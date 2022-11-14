@@ -1,4 +1,4 @@
-const {SelectMenuInteraction, MessageEmbed, GuildChannel} = require("discord.js")
+const {SelectMenuInteraction, EmbedBuilder, GuildChannel} = require("discord.js")
 const botConfig = require("../../util/botConfig")
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
             return
         }
 
-        const errorEmbed = new MessageEmbed()
+        const errorEmbed = new EmbedBuilder()
             .setColor("RED")
             .setDescription("Error")
 
@@ -29,7 +29,7 @@ module.exports = {
 
         const newChannelId = botConfig.getConfig().quote.channelId
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor("GREEN")
             .setDescription(`updated value of \`quote.channelId\` to \`${newChannelId}\` (${await interaction.guild.channels.fetch(newChannelId)})`)
 

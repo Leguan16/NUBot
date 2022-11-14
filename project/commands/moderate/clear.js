@@ -1,5 +1,5 @@
-const {CommandInteraction, MessageEmbed} = require("discord.js");
-const {ApplicationCommandOptionType} = require("discord-api-types/v8");
+const {CommandInteraction, EmbedBuilder} = require("discord.js");
+const {ApplicationCommandOptionType} = require("discord-api-types/v10");
 
 module.exports = {
     activated: true,
@@ -36,7 +36,7 @@ module.exports = {
         if (amount) {
             const deleted = await deleteMessages(amount, channel, user)
 
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor("#ff6c00")
                 .setDescription(`cleared ${deleted} messages in channel ${channel}`)
             interaction.reply({embeds: [embed]})

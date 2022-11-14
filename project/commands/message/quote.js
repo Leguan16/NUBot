@@ -1,9 +1,9 @@
-const {CommandInteraction} = require("discord.js")
+const {CommandInteraction, Partials} = require("discord.js")
 
 module.exports = {
     activated: true,
     name: "quote",
-    type: "MESSAGE",
+    type: Partials.Message,
     /**
      *
      * @param {CommandInteraction} interaction

@@ -1,6 +1,6 @@
 const {client} = require("../../main");
 const botConfig = require("../../util/botConfig")
-const { MessageEmbed, TextChannel } = require("discord.js")
+const { EmbedBuilder, TextChannel } = require("discord.js")
 
 module.exports = {
     name: "guildMemberRemove",
@@ -20,7 +20,7 @@ module.exports = {
             user = await user.user.fetch()
         }
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor("aa0000")
             .setTitle("User Left")
             .setDescription(`**${user.user.username} left the server**`)

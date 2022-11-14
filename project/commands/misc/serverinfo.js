@@ -1,5 +1,5 @@
-const {CommandInteraction, MessageEmbed, RoleManager, GuildMember} = require("discord.js")
-const {GuildPremiumTier} = require("discord-api-types/v8")
+const {CommandInteraction, EmbedBuilder, RoleManager, GuildMember} = require("discord.js")
+const {GuildPremiumTier} = require("discord-api-types/v10")
 const {client} = require("../../main")
 
 module.exports = {
@@ -34,40 +34,40 @@ async function serverInfo(interaction) {
 
     //console.log(guild)
     //console.log(client)
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
         .setColor("#0070cc")
         .setTitle("Serverinfo")
         .setDescription("Information about the guild")
         .setTimestamp(Date.now())
         .setFooter("Serverinfo by " + client.user.username, client.user.avatarURL({size: 4096}))
         .setThumbnail(guild.iconURL({size: 4096}),)
-        .addField("Name:", guild.name)
-        .addField("Member count:", guild.memberCount.toString())
-        .addField("Date Created:", guild.createdAt.toDateString())
-        .addField("Owner:", `${owner}`)
-        .addField("Roles:", rolesMention)
+        .addFields({name: "Name:", value: guild.name},
+            {name: "Member count:", value: guild.memberCount.toString()},
+            {name: "Date Created:", value: guild.createdAt.toDateString()},
+            {name: "Owner:", value: `${owner}`},
+            {name: "Roles:", value: rolesMention});
 
     if (guild.premiumSubscriptionCount) {
         let boostLevel = 0
 
         switch (guild.premiumTier) {
-            case "NONE":
+            case GuildPremiumTier.None:
                 boostLevel = 0
                 break
-            case "TIER_1":
+            case GuildPremiumTier.Tier1:
                 boostLevel = 1
                 break
-            case "TIER_2":
+            case GuildPremiumTier.Tier2:
                 boostLevel = 2
                 break
-            case "TIER_3":
+            case GuildPremiumTier.Tier3:
                 boostLevel = 3
                 break
         }
 
         embed
-            .addField("Server boost level:", boostLevel.toString())
-            .addField("Active server boosts:", guild.premiumSubscriptionCount.toString())
+            .addFields({name: "Server boost level:", value: boostLevel.toString()},
+                {name: "Active server boosts:", value: guild.premiumSubscriptionCount.toString()});
     }
 
     interaction.reply({embeds: [embed]})

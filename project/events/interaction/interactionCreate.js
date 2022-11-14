@@ -1,4 +1,4 @@
-const {Client, CommandInteraction, MessageEmbed} = require("discord.js")
+const {Client, CommandInteraction,  EmbedBuilder} = require("discord.js")
 
 module.exports = {
     name: "interactionCreate",
@@ -8,11 +8,11 @@ module.exports = {
      * @param {Client} client
      */
     async execute(interaction, client) {
-        if (interaction.isCommand() || interaction.isContextMenu()) {
+        if (interaction.isCommand() || interaction.isContextMenuCommand()) {
             const command = client.commands.get(interaction.commandName);
 
-            const errorEmbed = new MessageEmbed()
-                .setColor("RED")
+            const errorEmbed = new EmbedBuilder()
+                .setColor("Red")
                 .setDescription("An error occurred while running the command")
 
             if (!command) return interaction.reply({embeds: errorEmbed}) && client.commands.delete(interaction.commandName);

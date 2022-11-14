@@ -1,6 +1,6 @@
-const {ApplicationCommandOptionType} = require("discord-api-types/v8");
-const {CommandInteraction, MessageEmbed} = require("discord.js")
-const {deleteMessages} = require("./clear")
+const {CommandInteraction, EmbedBuilder} = require("discord.js");
+const {ApplicationCommandOptionType} = require("discord-api-types/v10");
+const {deleteMessages} = require("./clear");
 
 module.exports = {
     activated: true,
@@ -43,7 +43,7 @@ async function deleteUntil(interaction) {
     let amount = messages.size
     const deleted = await deleteMessages(amount, channel, user)
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
         .setColor("#ff6c00")
         .setDescription(`Cleared ${deleted} messages in channel ${channel}`)
 

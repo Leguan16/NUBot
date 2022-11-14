@@ -31,7 +31,7 @@ module.exports = {
                 .setColor("#ab006c")
                 .setDescription("Edit the quote config")
 
-            const channelId = botConfig.getConfig().quote.channelId
+            const channelId = botConfig.getConfig().config.quote.channelId
             embed.addField("channelId", `${channelId ? `${channelId}\n${await guild.channels.fetch(channelId)}` : "none"}`)
 
             const components = message.components

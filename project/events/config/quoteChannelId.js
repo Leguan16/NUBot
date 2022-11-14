@@ -1,4 +1,5 @@
-const {ButtonInteraction, GuildChannel, MessageSelectMenu, MessageActionRow, MessageEmbed, MessageButton} = require("discord.js")
+const {ButtonInteraction, GuildChannel, MessageSelectMenu, MessageActionRow, EmbedBuilder, MessageButton} = require("discord.js")
+const {ChannelType} = require("discord-api-types/v10");
 
 module.exports = {
     name: "interactionCreate",
@@ -13,7 +14,7 @@ module.exports = {
             return
         }
 
-        const errorEmbed = new MessageEmbed()
+        const errorEmbed = new EmbedBuilder()
             .setColor("RED")
             .setDescription("Error")
 
@@ -26,7 +27,7 @@ module.exports = {
             const selectMenu = new MessageSelectMenu().setCustomId("quote.channelId.menu").setPlaceholder("select channel");
 
             (await channels).forEach(channel => {
-                if (channel.type === "GUILD_TEXT") {
+                if (channel.type === ChannelType.GuildText) {
                     const data = {
                         name: channel.name,
                         id: channel.id
@@ -47,7 +48,7 @@ module.exports = {
             const buttonRow = new MessageActionRow()
                 .addComponents(new MessageButton().setCustomId("quote.channelId.back").setLabel("back").setStyle("DANGER"))
 
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor("#ab006c")
                 .setDescription("Edit the quote.channelId config")
 

@@ -1,5 +1,5 @@
 const {CommandInteraction} = require("discord.js");
-const {ApplicationCommandOptionType} = require("discord-api-types/v8");
+const {ApplicationCommandOptionType} = require("discord-api-types/v10");
 const fs = require("fs");
 
 module.exports = {

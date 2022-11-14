@@ -1,4 +1,5 @@
-const {CommandInteraction, MessageActionRow, MessageButton, MessageEmbed, ButtonInteraction} = require("discord.js");
+const {CommandInteraction, MessageActionRow, MessageButton, EmbedBuilder, ButtonInteraction} = require("discord.js");
+const botConfig = require("../../util/botConfig");
 
 module.exports = {
     activated: true,
@@ -21,11 +22,14 @@ module.exports = {
 async function reply(interaction) {
     const row = new MessageActionRow()
 
-    row.addComponents(
-        new MessageButton().setCustomId("quote").setLabel("Quote").setStyle("PRIMARY")
-    )
+    for (let configKey in botConfig.config) {
+        row.addComponents(
+            new MessageButton().setCustomId(configKey).setLabel(configKey).setStyle("PRIMARY")
+        )
+    }
 
-    const embed = new MessageEmbed()
+
+    const embed = new EmbedBuilder()
         .setColor("#ab006c")
         .setTitle("Config")
         .setDescription("Edit the config!")

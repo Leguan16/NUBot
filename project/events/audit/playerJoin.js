@@ -1,6 +1,6 @@
 const {client} = require("../../main");
 const botConfig = require("../../util/botConfig")
-const {MessageEmbed} = require("discord.js");
+const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "guildMemberAdd",
@@ -15,7 +15,7 @@ module.exports = {
 
 
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor("00aa00")
             .setTitle("User Joined")
             .setDescription(`${user.user.name} joined the server`)

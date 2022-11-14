@@ -1,5 +1,5 @@
 const {Perms} = require("../validation/permissions");
-const {Client} = require("discord.js")
+const {Client, Partials} = require("discord.js")
 const {promisify} = require("util");
 const {glob} = require("glob");
 const botConfig = require("../util/botConfig")
@@ -30,7 +30,7 @@ module.exports = async (client) => {
         }
 
         if (!command.description) {
-            if (command.type !== "2" && command.type !== "MESSAGE") {
+            if (command.type !== "2" && command.type !== Partials.Message) {
                 error++;
                 await console.log("Loading command".red, command.name, "failed: Missing description.".red)
                 return

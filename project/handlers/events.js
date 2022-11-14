@@ -8,8 +8,8 @@ module.exports = async (client) => {
     let successful = 0;
     let error = 0;
 
-    (await PG(`${process.cwd()}/project/events/*/*.js`)).map(async (file) => {
-
+    console.log(process.cwd());
+    (await PG(`${process.cwd()}\\project\\events\\*\\*.js`)).map(async (file) => {
         const event = require(file)
 
         if (!Events.includes(event.name) || !event.name) {
